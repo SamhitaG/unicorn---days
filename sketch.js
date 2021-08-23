@@ -122,9 +122,12 @@ if(gameState === MENU){
 enemy();
 
 if(unicorn.isTouching(monsterGroup)){
+  jumpsound.play();
  score=score-3
  monsterGroup.destroyEach()
  chances=chances-1
+ if(chances === 0 ||score<=0){
+  gameState = END;}
 }
      }
 if(gameState1 ===DAY){
@@ -140,14 +143,14 @@ monsterGroup.destroyEach()
     gameState=END;
   }
   if(unicorn.isTouching(obstacleGroup)){
-    
+    jumpsound.play();
     chances = chances - 1;
     obstacleGroup.destroyEach();}
    
 
     if(chances === 0 ||score<=0){
       gameState = END;
-
+     
      
     }
 }
@@ -167,20 +170,20 @@ monsterGroup.destroyEach()
 
       if(keyDown("space")&& unicorn.y >= 100) {
         unicorn.velocityY = -7; 
-        jumpsound.play();
+       
         }
         if(keyDown("up")&& unicorn.y >= 100) {
           unicorn.velocityY = -12; 
 
-          jumpsound.play();
+         
         }
         unicorn.velocityY = unicorn.velocityY + 1.5;
         
         
       }
       else if(gameState === END){
-
-
+        text("Game Over", displayWidth/4, displayHeight/4);
+        
         obstacleGroup.setVelocityXEach(0);
       
         obstacleGroup.setLifetimeEach(-1);
@@ -273,3 +276,8 @@ async function getBackgroundImg(){
     }
     backgroundImg = loadImage(bg);
   }
+
+     
+    
+     
+     
